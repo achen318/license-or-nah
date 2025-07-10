@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>License or Nah?</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <!--TODO: Favicon Link-->
+    <!-- <link rel="icon" href="" /> -->
+
+    <meta name="author" content="Anthony Chen" />
+    <meta
+      name="description"
+      content="LicenseOrNah uses questionable machine learning to determine if you will get a driver's license, or nah."
+    />
+
+    <meta name="copyright" content="Anthony Chen" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="License or Nah?" />
+    <meta
+      property="og:description"
+      content="LicenseOrNah uses questionable machine learning to determine if you will get a driver's license, or nah."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="twitter:card" content="summary" />
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <h1>LicenseOrNah</h1>
+
+    <form action="/predict" method="post" id="prediction-form">
+      <div>
+        Gender:
+        <input type="radio" name="gender" id="male" value="Male" required />
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="Female" required />
+        <label for="female">Female</label>
+      </div>
+
+      <div>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" min="16" max="100" required />
+      </div>
+
+      <div>
+        Race:
+        <input type="radio" name="race" id="white" value="White" required />
+        <label for="white">White</label>
+        <input type="radio" name="race" id="black" value="Black" required />
+        <label for="black">Black</label>
+        <input type="radio" name="race" id="other" value="Other" required />
+        <label for="other">Other</label>
+      </div>
+
+      <div>
+        Training:
+        <input type="radio" name="training" id="none" value="None" required />
+        <label for="none">None</label>
+        <input type="radio" name="training" id="basic" value="Basic" required />
+        <label for="basic">Basic</label>
+        <input
+          type="radio"
+          name="training"
+          id="advanced"
+          value="Advanced"
+          required
+        />
+        <label for="advanced">Advanced</label>
+      </div>
+
+      <div>
+        <label for="signals">Signals:</label>
+        <input
+          type="range"
+          name="signals"
+          id="signals"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="yield">Yield:</label>
+        <input
+          type="range"
+          name="yield"
+          id="yield"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="speed">Speed Control:</label>
+        <input
+          type="range"
+          name="speed"
+          id="speed"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="night">Night Drive:</label>
+        <input
+          type="range"
+          name="night"
+          id="night"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="signs">Road Signs:</label>
+        <input
+          type="range"
+          name="signs"
+          id="signs"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="steer">Steer Control:</label>
+        <input
+          type="range"
+          name="steer"
+          id="steer"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="mirror">Mirror Usage:</label>
+        <input
+          type="range"
+          name="mirror"
+          id="mirror"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="confidence">Confidence:</label>
+        <input
+          type="range"
+          name="confidence"
+          id="confidence"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="parking">Parking:</label>
+        <input
+          type="range"
+          name="parking"
+          id="parking"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="theory">Theory Test:</label>
+        <input
+          type="range"
+          name="theory"
+          id="theory"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          required
+        />
+      </div>
+
+      <div>
+        Reactions:
+        <input type="radio" name="reactions" id="slow" value="Slow" required />
+        <label for="slow">Slow</label>
+        <input
+          type="radio"
+          name="reactions"
+          id="average"
+          value="Average"
+          required
+        />
+        <label for="average">Average</label>
+        <input type="radio" name="reactions" id="fast" value="Fast" required />
+        <label for="fast">Fast</label>
+      </div>
+
+      <input type="submit" value="Predict" />
+    </form>
+  </body>
+</html>
