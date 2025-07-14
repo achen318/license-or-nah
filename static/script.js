@@ -1,4 +1,10 @@
 const form = document.getElementById('prediction-form');
+const modal = document.getElementById('pred-modal');
+const modalResult = document.getElementById('modal-result');
+
+if (!form || !modal || !modalResult) {
+  console.error('Some elements are missing from the DOM.');
+}
 
 const numericalFields = {
   signals: 'Signals',
@@ -15,9 +21,19 @@ const numericalFields = {
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+  await processForm();
+});
 
+window.onclick = (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+};
+
+async function processForm() {
   const formData = new FormData(form);
 
+  // POST request, show modal or display error
   await fetch('/predict', {
     method: 'POST',
     headers: {
@@ -27,13 +43,12 @@ form.addEventListener('submit', async (event) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      alert(`Prediction: ${data.prediction ? 'Yes' : 'No'}`);
+      showModal(data.prediction);
     })
     .catch((error) => {
       console.error(`Error: ${error}`);
-      alert('Something went wrong. Please try again later.');
     });
-});
+}
 
 function transformData(formData) {
   const data = {};
@@ -88,4 +103,21 @@ function transformData(formData) {
   }
 
   return data;
+}
+
+function showModal(qualified) {
+  // Add text
+  modalResult.textContent = qualified ? 'Qualified' : 'Not Qualified';
+
+  // Add classes for styling
+  modalResult.className = 'modal-result';
+  modalResult.classList.add(
+    qualified ? 'result-qualified' : 'result-not-qualified'
+  );
+
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
 }

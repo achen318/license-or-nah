@@ -10,8 +10,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
-    <!--TODO: Favicon Link-->
-    <!-- <link rel="icon" href="" /> -->
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
 
     <meta name="author" content="Anthony Chen" />
     <meta
@@ -277,8 +279,18 @@
           <label for="fast">Fast</label>
         </div>
 
-        <input type="submit" value="Predict" />
+        <input type="submit" value="Predict" class="btn" />
       </form>
     </main>
+
+    <div id="pred-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2>Prediction Result</h2>
+        <div id="modal-result"></div>
+        <button class="btn" onclick="closeModal()">OK</button>
+      </div>
+    </div>
   </body>
 </html>
